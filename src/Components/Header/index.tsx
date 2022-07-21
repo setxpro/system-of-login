@@ -17,7 +17,7 @@ const Header: React.FC<Props> = ({handleLogout}) => {
     setDataInfo(auth.user)
   }
 
-  useEffect(() => {getData()}, [])
+  useEffect(() => {getData()}, [getData])
 
     return (
       <C.Container>
