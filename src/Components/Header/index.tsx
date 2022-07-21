@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../../Hooks/useAuth';
 import { User } from '../../Types/User';
 
@@ -11,13 +11,13 @@ type Props = {
 const Header: React.FC<Props> = ({handleLogout}) => {
     const auth = useAuth();
 
-  const [dataInfo, setDataInfo] = useState<User | null>(null);
+    const [dataInfo, setDataInfo] = useState<User | null>(null);
 
-  const getData = () => {
-    setDataInfo(auth.user)
-  }
+    const getData = useCallback(() => {
+        setDataInfo(auth.user)
+    }, [auth.user])
 
-  useEffect(() => {getData()}, [getData])
+    useEffect(() => { getData() }, [getData])
 
     return (
       <C.Container>
