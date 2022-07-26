@@ -12,6 +12,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [msg, setMsg] = useState('');
 
     const handleClick = async () => {
         if (!email) {
@@ -20,31 +21,30 @@ const Login = () => {
         if (!password) {
             setError('Insira ao menos uma senha...')
         }
-        
         if (email && password) {
-
             const isLogged = await auth.signIn(email, password);
+            setMsg(auth.message);
+
             if (isLogged) {
-                navigate('/user');
+                navigate('/update-password');
             }
             
-            else {
-                setError('Não foi possível realizar login.')
-            }
         }
     }
 
   return (
     <C.Container>
         <C.Form>
-            <C.LabelError>{error}</C.LabelError>
+            <C.LabelError>{msg}{error}</C.LabelError>
             <C.InputGroup>
                 <C.Input 
                     type="text" 
                     name="login" 
                     placeholder='Login...'
                     value={email}
-                    onChange={e => [setEmail(e.target.value), setError('')]}
+                    onChange={e => 
+                        [setEmail(e.target.value), setError(''), setMsg('')]
+                    }
                 />
             </C.InputGroup>
             <C.InputGroup>
@@ -53,12 +53,15 @@ const Login = () => {
                     name="password" 
                     placeholder='Password...'
                     value={password}
-                    onChange={e => [setPassword(e.target.value), setError('')]}
+                    onChange={e => 
+                        [setPassword(e.target.value), setError(''), setMsg('')]
+                    }
                     required
                 />
             </C.InputGroup>
             <C.ContentBtnSubmit>
-                <C.Button onClick={e => {
+                <C.Button 
+                    onClick={e => {
                     e.preventDefault();
                     handleClick();
                 }}>SIGN IN</C.Button>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     height: 90px;
-    background: lightblue;
+    background: #212529;
 
     display: flex;
     justify-content: space-between;
@@ -32,6 +32,7 @@ export const Container = styled.div`
     }
     .content-name {
         > p {
+            color: #EEE;
             &:nth-child(2) {
                 text-align: end;
             }
@@ -47,7 +48,7 @@ export const Container = styled.div`
                 width: 20px;
                 height: 20px;
                 border-radius: 12.5px;
-                background: green;
+                background: #0f0;
                 position: absolute;
                 bottom: 3.5px;
                 right: 10px;
@@ -59,6 +60,8 @@ export const Container = styled.div`
                 width: 70px;
                 height: 70px;
                 border-radius: 50%;
+                border: 3px solid #059;
+                padding: 3px;
             }
         }
     }

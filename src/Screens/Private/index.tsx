@@ -8,9 +8,9 @@ const Private: React.FC = () => {
 
   const auth = useAuth();
 
-  const handleLogout = async() => {
-      const data = await auth.signOut();
-      return data;
+  const handleLogout = () => {
+      const user = auth.signOut();
+      return user;
   }
 
   return (
@@ -18,6 +18,9 @@ const Private: React.FC = () => {
           <Header handleLogout={handleLogout}/>
           <C.Content>
             <h1>PRIVATE PAGE</h1>
+            <table>
+              
+            </table>
           </C.Content>
       </C.Container>
   );
