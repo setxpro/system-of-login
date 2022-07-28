@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-   baseURL: 'https://rhexpert-api.herokuapp.com'
+   baseURL: 'http://187.0.198.166:1259/rest'
 });
 
 export const useApi = () => ({
@@ -10,22 +10,18 @@ export const useApi = () => ({
         const {  data: {data: dados} } = await api.get('/user');
         return dados;
     },
-    signIn: async (email: string, password:string) => {
+    signIn: async (login: string, senha:string) => {
         try {
-            const { data } = await api.post('/auth/signin', {
-                email, password 
+            const {  data: {data: dados} } = await api.post('/PSSLOGIN', {
+                login, senha 
             })
-            return data;
+             return dados;
         } catch (error) {
             return console.log(error)
         }
     },
-    signOut: async () => {
-        const { data } = await axios.post('/logout');
-          return  { status: true, data } // FAKE
-    },
-    updatePass: async (password:string) => {
-        const { data } = await axios.put('/update', { password });
+    updatePass: async (senha:string) => {
+        const { data } = await axios.put('/update', { senha });
         return  data
     }
 })

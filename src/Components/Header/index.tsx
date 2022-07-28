@@ -8,7 +8,7 @@ type Props = {
     handleLogout: () => void;
 }
  
-const Header: React.FC<Props> = ({handleLogout}) => {
+const Header: React.FC<Props> = ({ handleLogout }) => {
     const auth = useAuth();
 
     const [dataInfo, setDataInfo] = useState<User | null>(null);
@@ -19,6 +19,10 @@ const Header: React.FC<Props> = ({handleLogout}) => {
 
     useEffect(() => { getData() }, [getData])
 
+    const addDefaultSrc = (ev:any) => {
+        ev.target.src = "https://manualdasecretaria.com.br/wp-content/themes/cera/assets/images/avatars/user-avatar.png";
+    }
+
     return (
       <C.Container>
           <div className='left-side'>
@@ -27,12 +31,11 @@ const Header: React.FC<Props> = ({handleLogout}) => {
           <div className='right-side'>
                 <div className='content-name'>
                     <p>{dataInfo?.fullname}</p>
-                    <p>Developer</p>
+                    <p>Desenvolvedor {dataInfo?.habilidades[0]}</p>
                 </div>
                 <div className='content-avatar'>
                     <div>
-                        {dataInfo?.avatar && <img src={dataInfo?.avatar} alt='avatar'/>}
-                        {dataInfo?.avatar === null && <img src="https://manualdasecretaria.com.br/wp-content/themes/cera/assets/images/avatars/user-avatar.png" alt="avatar"/>}
+                        {<img onError={addDefaultSrc} src={`https://rhexpert-api.herokuapp.com/users/avatar/${dataInfo?._id}`} alt="avatar"/>}
                     </div>
                 </div>
           </div>

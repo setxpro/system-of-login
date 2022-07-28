@@ -9,20 +9,20 @@ const Login = () => {
     const auth = useAuth();
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [login, setLogin] = useState('');
+    const [senha, setSenha] = useState('');
     const [error, setError] = useState('');
     const [msg, setMsg] = useState('');
 
     const handleClick = async () => {
-        if (!email) {
+        if (!login) {
             setError('Insira ao menos um Login...')
         }
-        if (!password) {
+        if (!senha) {
             setError('Insira ao menos uma senha...')
         }
-        if (email && password) {
-            const isLogged = await auth.signIn(email, password);
+        if (login && senha) {
+            const isLogged = await auth.signIn(login, senha);
             setMsg(auth.message);
 
             if (isLogged) {
@@ -34,17 +34,18 @@ const Login = () => {
 
   return (
     <C.Container>
-        <C.Form>
+        <C.Form autoComplete="off">
             <C.LabelError>{msg}{error}</C.LabelError>
             <C.InputGroup>
                 <C.Input 
                     type="text" 
                     name="login" 
                     placeholder='Login...'
-                    value={email}
+                    value={login}
                     onChange={e => 
-                        [setEmail(e.target.value), setError(''), setMsg('')]
+                        [setLogin(e.target.value), setError(''), setMsg('')]
                     }
+                    required
                 />
             </C.InputGroup>
             <C.InputGroup>
@@ -52,9 +53,9 @@ const Login = () => {
                     type="password" 
                     name="password" 
                     placeholder='Password...'
-                    value={password}
+                    value={senha}
                     onChange={e => 
-                        [setPassword(e.target.value), setError(''), setMsg('')]
+                        [setSenha(e.target.value), setError(''), setMsg('')]
                     }
                     required
                 />

@@ -10,19 +10,14 @@ const AuthProvider = ({children}:{children:ReactNode}) => {
 
     const [message, setMessage] = useState('');
 
-    const signIn = (async (email: string, password: string) => {
-        const data = await api.signIn(email, password);
+    const signIn = (async (login: string, senha: string) => {
+        const data = await api.signIn(login, senha);
 
-            const msg = data.message;
-            const auth = data.data.user;
+        if (data.user) {
+            setUser(data.user);
+            return true
+        }
 
-            if (msg) 
-                setMessage(msg);
-                
-            if (auth) {
-                setUser(auth);
-                return true;
-            }
         return false
     });
 
@@ -30,8 +25,8 @@ const AuthProvider = ({children}:{children:ReactNode}) => {
         setUser(null);
     }
 
-    const updatePass = async (password: string) => {
-        const update = await api.updatePass(password);
+    const updatePass = async (senha: string) => {
+        const update = await api.updatePass(senha);
         return update;
     }
 

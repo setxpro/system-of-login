@@ -10,4 +10,3 @@
         - EsqSenha => Esqueceu a Senha
         - UsuCadastro => Usuário Cadastro
         - DataCadast => Data Cadastro
-    

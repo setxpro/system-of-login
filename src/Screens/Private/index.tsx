@@ -9,8 +9,8 @@ const Private: React.FC = () => {
   const auth = useAuth();
 
   const handleLogout = () => {
-      const user = auth.signOut();
-      return user;
+      const userToNull = auth.signOut();
+      return userToNull;
   }
 
   return (
